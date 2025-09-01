@@ -1,0 +1,22 @@
+{% extends "notes/base.html" %}
+{% block title %}Пользователи{% endblock %}
+{% block content %}
+<h1>Пользователи</h1>
+<ul class="list-group">
+  {% for u in users %}
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      <span>
+        <a href="{% url 'notes:user_detail' u.id %}">
+          {{ u.get_full_name|default:u.username }}
+        </a>
+        <span class="text-muted">· {{ u.email }}</span>
+      </span>
+      {% if u.is_staff %}
+        <span class="badge text-bg-secondary">admin</span>
+      {% endif %}
+    </li>
+  {% empty %}
+    <li class="list-group-item text-muted">Нет пользователей.</li>
+  {% endfor %}
+</ul>
+{% endblock %}

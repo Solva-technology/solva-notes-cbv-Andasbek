@@ -1,0 +1,24 @@
+{% extends "notes/base.html" %}
+{% block title %}Удалить заметку #{{ note.id }}{% endblock %}
+
+{% block content %}
+<h1 class="mb-3">Удалить заметку #{{ note.id }}?</h1>
+
+<div class="alert alert-warning" role="alert">
+  Это действие необратимо. Заметка будет удалена навсегда.
+</div>
+
+<div class="card mb-3">
+  <div class="card-body">
+    <p class="mb-1"><strong>Автор:</strong> {{ note.author.name }} ({{ note.author.email }})</p>
+    <p class="mb-1"><strong>Статус:</strong> {{ note.status.name }}</p>
+    <p class="mb-0"><strong>Текст:</strong> {{ note.text|default:"(пусто)"|truncatechars:200 }}</p>
+  </div>
+</div>
+
+<form method="post">
+  {% csrf_token %}
+  <button type="submit" class="btn btn-danger">Удалить</button>
+  <a href="{% url 'notes:note_detail' note.id %}" class="btn btn-outline-secondary">Отмена</a>
+</form>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "notes/base.html" %}
+{% block title %}{% if mode == "edit" %}Редактирование{% else %}Новая заметка{% endif %}{% endblock %}
+{% block content %}
+<h1>{% if mode == "edit" %}Редактирование заметки{% else %}Новая заметка{% endif %}</h1>
+
+<form method="post">
+  {% csrf_token %}
+  {{ form.non_field_errors }}
+
+  <div class="mb-3">
+    {{ form.text.label_tag }}
+    {{ form.text }}
+    {{ form.text.errors }}
+  </div>
+
+  <div class="mb-3">
+    {{ form.status.label_tag }}
+    {{ form.status }}
+    {{ form.status.errors }}
+  </div>
+
+  <div class="mb-3">
+    {{ form.categories.label_tag }}
+    {{ form.categories }}
+    {{ form.categories.errors }}
+  </div>
+
+  <button class="btn btn-success">{% if mode == "edit" %}Сохранить{% else %}Создать{% endif %}</button>
+  <a class="btn btn-outline-secondary" href="{% url 'notes:index' %}">Отмена</a>
+</form>
+{% endblock %}

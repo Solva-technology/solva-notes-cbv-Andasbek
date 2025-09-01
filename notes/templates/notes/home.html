@@ -1,0 +1,46 @@
+{% extends "notes/base.html" %}
+{% block title %}Главная{% endblock %}
+{% block content %}
+<div class="py-4">
+  <h1 class="mb-3">Добро пожаловать в Note App</h1>
+  <p class="text-muted mb-4">
+    Учебное приложение на Django для работы с заметками.
+  </p>
+
+  <div class="row g-3">
+    <div class="col-md-4">
+      <div class="card h-100">
+        <div class="card-body">
+          <h5 class="card-title">Последние заметки</h5>
+          <p class="card-text">Смотрите свежие заметки на главной странице списка.</p>
+          <a class="btn btn-primary" href="{% url 'notes:index' %}">Перейти к списку</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card h-100">
+        <div class="card-body">
+          <h5 class="card-title">Пользователи</h5>
+          <p class="card-text">Откройте список пользователей и их заметок.</p>
+          <a class="btn btn-outline-primary" href="{% url 'notes:users_list' %}">Список пользователей</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4">
+      <div class="card h-100">
+        <div class="card-body">
+          <h5 class="card-title">Создать заметку</h5>
+          <p class="card-text">Добавьте свою первую заметку.</p>
+          {% if user.is_authenticated %}
+            <a class="btn btn-success" href="{% url 'notes:note_create' %}">Новая заметка</a>
+          {% else %}
+            <a class="btn btn-success" href="{% url 'users:login' %}">Войдите, чтобы создать</a>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
