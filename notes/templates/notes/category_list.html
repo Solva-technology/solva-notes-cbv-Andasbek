@@ -1,0 +1,25 @@
+{% extends "notes/base.html" %}
+{% block title %}Категории{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h1 class="mb-0">Категории</h1>
+  {% if user.is_authenticated %}
+    <a class="btn btn-primary" href="{% url 'notes:note_create' %}">Новая заметка</a>
+  {% endif %}
+</div>
+
+<ul class="list-group">
+  {% for cat in categories %}
+    <li class="list-group-item d-flex justify-content-between align-items-center">
+      <span>
+        <a href="{% url 'notes:category_notes' cat.id %}">{{ cat.title }}</a>
+        {% if cat.description %}
+          <small class="text-muted d-block">{{ cat.description|truncatechars:140 }}</small>
+        {% endif %}
+      </span>
+    </li>
+  {% empty %}
+    <li class="list-group-item text-muted">Категорий пока нет.</li>
+  {% endfor %}
+</ul>
+{% endblock %}

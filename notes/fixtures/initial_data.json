@@ -1,0 +1,13 @@
+[
+  {"model": "notes.status", "pk": 1, "fields": {"name": "draft", "is_final": false}},
+  {"model": "notes.status", "pk": 2, "fields": {"name": "published", "is_final": true}},
+
+  {"model": "notes.category", "pk": 1, "fields": {"title": "Общее", "description": "Разное"}},
+  {"model": "notes.category", "pk": 2, "fields": {"title": "Работа", "description": "По работе"}},
+
+  {"model": "notes.user", "pk": 1, "fields": {"name": "Иван", "email": "ivan@example.com"}},
+  {"model": "notes.userprofile", "pk": 1, "fields": {"user": 1, "bio": "Разработчик", "birth_date": "1990-01-01"}},
+
+  {"model": "notes.note", "pk": 1, "fields": {"text": "Первая заметка про проект.", "created_at": "2025-01-01T10:00:00Z", "author": 1, "status": 1, "categories": [1,2]}},
+  {"model": "notes.note", "pk": 2, "fields": {"text": "Опубликованная заметка.", "created_at": "2025-02-02T12:00:00Z", "author": 1, "status": 2, "categories": [1]}}
+]
